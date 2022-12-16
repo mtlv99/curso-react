@@ -4,17 +4,30 @@
   "description": "Curso React",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint --ext .js,.jsx --fix"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mtlv99/curso-react.git"
   },
-  "keywords": ["react", "javascript", "js"],
+  "keywords": [
+    "react",
+    "javascript",
+    "js"
+  ],
   "author": "mtlv99",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mtlv99/curso-react/issues"
   },
-  "homepage": "https://github.com/mtlv99/curso-react#readme"
+  "homepage": "https://github.com/mtlv99/curso-react#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  }
 }
