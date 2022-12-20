@@ -1,24 +1,12 @@
-const getGifs = async (category) => {
-  console.log('Buscando', category);
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=bopySAL5uwOsyZUf5Fc9UObeY4uVe4fr&q=${category}&limit=20`;
+import { useEffect } from 'react';
+import getGifs from '../helpers/getGifs';
 
-  const resp = await fetch(url);
-  // para que tenga un valor por defecto
-  const { data = [] } = await resp.json();
-
-  const gifs = data.map((img) => ({
-    id: img.id,
-    title: img.title,
-    url: img.images.downsized_medium.url,
-  }));
-
-  console.log('result', gifs);
-  return gifs;
-  // return '';
-};
 
 export default function GifGrid({ category }) {
-  getGifs(category);
+  useEffect(() => {
+    getGifs(category);
+  }, []);
+
 
   return (
     <h1>
