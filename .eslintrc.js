@@ -28,5 +28,8 @@ module.exports = {
     'no-use-before-define': 'off',
     // React import is no longer required since React 17
     'react/react-in-jsx-scope': 'off',
+    'linebreak-style': 'off',
+    // Some components are just examples so I wont declare PropTypes for all of them (even though you should - for real-life components!)
+    'react/prop-types': 'off',
   },
 };
