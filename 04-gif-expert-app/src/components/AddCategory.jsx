@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // export default function AddCategory({ setCategory }) {
-export function AddCategory({ onNewCategory }) {
+export const AddCategory = ({ onNewCategory }) => {
   const [inputValue, setInputValue] = useState('');
 
   const onInputChange = ({ target }) => {
@@ -58,4 +58,4 @@ export function AddCategory({ onNewCategory }) {
       />
     </form>
   );
-}
+};

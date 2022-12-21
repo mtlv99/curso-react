@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 // 2 componentes en un mismo import
 import { AddCategory, GifGrid } from './components';
 
-export default function GifExpertApp() {
+const GifExpertApp = () => {
   const [category, setCategory] = useState([]);
 
   const onAddCategory = (newCategory) => {
@@ -44,4 +44,6 @@ export default function GifExpertApp() {
 
 
   );
-}
+};
+
+export default GifExpertApp;

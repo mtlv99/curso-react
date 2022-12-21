@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -33,5 +34,8 @@ module.exports = {
     'react/prop-types': 'off',
     // This rule doesn't help with the creation of index files for components.
     'import/prefer-default-export': 'off',
+    // I prefer to use this type of definition, just a personal preference, but it's good to
+    // have an standard on it.
+    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
   },
 };
