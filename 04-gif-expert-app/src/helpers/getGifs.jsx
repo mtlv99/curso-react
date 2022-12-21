@@ -1,5 +1,4 @@
 export default async function getGifs(category) {
-  console.log('Buscando', category);
   const url = `https://api.giphy.com/v1/gifs/search?api_key=bopySAL5uwOsyZUf5Fc9UObeY4uVe4fr&q=${category}&limit=20`;
 
   const resp = await fetch(url);
@@ -12,7 +11,5 @@ export default async function getGifs(category) {
     url: img.images.downsized_medium.url,
   }));
 
-  console.log('result', gifs);
   return gifs;
-  // return '';
 }

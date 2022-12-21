@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // export default function AddCategory({ setCategory }) {
-export default function AddCategory({ onNewCategory }) {
+export function AddCategory({ onNewCategory }) {
   const [inputValue, setInputValue] = useState('');
 
   const onInputChange = ({ target }) => {
@@ -50,7 +50,7 @@ export default function AddCategory({ onNewCategory }) {
       {/* Recordar que para los input se deben vincular tanto el value, como el onChange */}
       <input
         type="text"
-        placeholder="Buscar Gifs..."
+        placeholder="Escribe algo interesante (café, galletas, navidad)..."
         value={inputValue}
         onChange={onInputChange}
         // Lo de arriba equivale a:

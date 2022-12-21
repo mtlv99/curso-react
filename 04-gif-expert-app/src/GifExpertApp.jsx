@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import AddCategory from './components/AddCategory';
-import GifGrid from './components/GifGrid';
+
+// Los archivos de index/indice o de barril son utiles para este tipo de importaciones,
+// 2 componentes en un mismo import
+import { AddCategory, GifGrid } from './components';
 
 export default function GifExpertApp() {
-  const [category, setCategory] = useState(['']);
+  const [category, setCategory] = useState([]);
 
   const onAddCategory = (newCategory) => {
     // Valida que no exista una categoria con el mismo nombre, para evitar el error de las keys en los map.
@@ -22,7 +24,7 @@ export default function GifExpertApp() {
 
   return (
     <>
-      <h1>GifExpertApp</h1>
+      <h1>Buscador de GIF&apos;s</h1>
 
       <AddCategory
         // category={category}

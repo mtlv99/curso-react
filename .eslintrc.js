@@ -31,5 +31,7 @@ module.exports = {
     'linebreak-style': 'off',
     // Some components are just examples so I wont declare PropTypes for all of them (even though you should - for real-life components!)
     'react/prop-types': 'off',
+    // This rule doesn't help with the creation of index files for components.
+    'import/prefer-default-export': 'off',
   },
 };
