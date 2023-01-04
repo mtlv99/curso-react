@@ -5,6 +5,7 @@ export const Message = () => {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   useEffect(() => {
     // console.log('Message Mounted');
+    // x, y vienen el evento "mousemove"
     const onMouseMove = ({ x, y }) => {
     //   console.log(':)');
       setCoords({ x, y });
