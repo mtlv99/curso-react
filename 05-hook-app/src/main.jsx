@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { HooksApp } from './HooksApp';
 import './index.css';
 
+// Ejecuta reducer de ejemplo
+// import './08-useReducer/intro-reducer';
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HooksApp />

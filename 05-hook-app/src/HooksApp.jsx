@@ -10,6 +10,7 @@ import { Memorize } from './06-memos/Memorize';
 import { MemoHook } from './06-memos/MemoHook';
 import { CallbackHook } from './06-memos/CallbackHook';
 import { Padre } from './07-tarea-memo/Padre';
+import { NotesApp } from './08-useReducer/NotesApp';
 
 export const HooksApp = () => (
   // <CounterApp />
@@ -23,5 +24,6 @@ export const HooksApp = () => (
   // <Memorize />
   // <MemoHook />
   // <CallbackHook />
-  <Padre />
+  // <Padre />
+  <NotesApp />
 );
