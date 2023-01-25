@@ -1,5 +1,7 @@
 import { useReducer } from 'react';
 import { notesReducer } from './notesReducer';
+import { NoteAdd } from './NoteAdd';
+import { NoteList } from './NoteList';
 
 
 const initialState = [
@@ -22,15 +24,32 @@ export const NotesApp = () => {
   // Hay un tercer parametro opcional llamado init, usado para hacer calculos pesados.
   const [notes, dispatchNote] = useReducer(notesReducer, initialState);
 
+
+  const onNewNote = (note) => {
+    console.log('onNewNote', note);
+  };
+
   return (
     <>
-      <h1>NotesApp con useReducer</h1>
+      <h1>
+        NotesApp: 10,
+        {' '}
+        <small>pendientes: 2</small>
+        {' '}
+      </h1>
       <hr />
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-      </ul>
+      <div className="row">
+        <div className="col-7">
+          {/* NoteList */}
+          <NoteList notes={notes} />
+        </div>
+        <div className="col-5">
+          <h4>Agregar Nota</h4>
+          <hr />
+          {/* NoteAdd */}
+          <NoteAdd onNewNote={onNewNote} />
+        </div>
+      </div>
 
     </>
   );
