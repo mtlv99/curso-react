@@ -1,70 +1,22 @@
-import { useReducer, useEffect } from 'react';
-import { notesReducer } from './notesReducer';
+/* eslint-disable react/jsx-one-expression-per-line */
+import { useNotes } from '../hooks';
 import { NoteAdd } from './NoteAdd';
 import { NoteList } from './NoteList';
-
-
-const initialState = [
-  // Referencia:
-  // {
-  //   id: new Date().getTime(),
-  //   description: 'Aprender Next.js',
-  //   done: false,
-  // },
-];
-
-// Lee las notas de localStorage. Si las notas no existen, el parsing fallará y
-// regresará el arreglo vacio.
-const initNotes = () => JSON.parse(localStorage.getItem('notes')) || [];
 
 // Nota: Fernando llamó originalmente `TodoApp` a este ejemplo en el curso,
 // pero yo prefiero llamarlo NotesApp, por lo que también tuve que cambiar
 // todo lo que fue nombrado con `todo` a `notes`.
 export const NotesApp = () => {
-  // Hay un tercer parametro opcional llamado init, usado para hacer calculos pesados.
-  const [notes, dispatchNote] = useReducer(notesReducer, initialState, initNotes);
-
-  // Guarda en localStorage cada vez que se guarda una nota.
-  // Tener cuidado cuando no se usa el init del useReducer, las notas estarían vacias,
-  // y guardaría un arreglo vacío la primera vez que se renderiza el componente.
-  useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes));
-  }, [notes]);
-
-  const onNewNote = (note) => {
-    const action = {
-      type: '[NOTE] Add Note',
-      payload: note,
-    };
-
-    dispatchNote(action);
-  };
-
-  const handleDeleteNote = (id) => {
-    const action = {
-      type: '[NOTE] Remove Note',
-      payload: id,
-    };
-
-    dispatchNote(action);
-  };
-
-  const handleToggleNote = (id) => {
-    const action = {
-      type: '[NOTE] Toggle Note',
-      payload: id,
-    };
-
-    dispatchNote(action);
-  };
+  // Inicialmente toda esa logica estaba acá, pero fue movida a un custom Hook nuevo llamado useNotes.
+  // Se ve muy limpio el componente así!
+  const {
+    notes, handleDeleteNote, handleToggleNote, handleNewNote, totalNotes, pendingNotes,
+  } = useNotes([]);
 
   return (
     <>
       <h1>
-        NotesApp: 10,
-        {' '}
-        <small>pendientes: 2</small>
-        {' '}
+        NotesApp: {totalNotes}, <small>pendientes: {pendingNotes}</small>
       </h1>
       <hr />
       <div className="row">
@@ -76,7 +28,7 @@ export const NotesApp = () => {
           <h4>Agregar Nota</h4>
           <hr />
           {/* NoteAdd */}
-          <NoteAdd onNewNote={onNewNote} />
+          <NoteAdd onNewNote={handleNewNote} />
         </div>
       </div>
 
