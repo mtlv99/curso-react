@@ -7,6 +7,8 @@ export const NoteAdd = ({ onNewNote }) => {
   const onHandleSubmit = (event) => {
     event.preventDefault();
 
+    if (note.length < 2) return;
+
     const newNote = {
       id: new Date().getTime(),
       description: note,
