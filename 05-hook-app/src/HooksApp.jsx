@@ -11,6 +11,7 @@ import { MemoHook } from './06-memos/MemoHook';
 import { CallbackHook } from './06-memos/CallbackHook';
 import { Padre } from './07-tarea-memo/Padre';
 import { NotesApp } from './08-useReducer/NotesApp';
+import { MainApp } from './09-useContext/MainApp';
 
 export const HooksApp = () => (
   // <CounterApp />
@@ -25,5 +26,6 @@ export const HooksApp = () => (
   // <MemoHook />
   // <CallbackHook />
   // <Padre />
-  <NotesApp />
+  // <NotesApp />
+  <MainApp />
 );
