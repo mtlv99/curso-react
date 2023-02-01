@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AboutPage } from './AboutPage';
+import { UserProvider } from './context/UserProvider';
 import { HomePage } from './HomePage';
 import { LoginPage } from './LoginPage';
 import { Navbar } from './Navbar';
@@ -8,7 +9,7 @@ import { Navbar } from './Navbar';
 export const MainApp = () => {
   console.log('');
   return (
-    <>
+    <UserProvider>
       <Navbar />
 
       {/* <h1>MainApp</h1> */}
@@ -25,6 +26,6 @@ export const MainApp = () => {
         {/* <Route path="/*" element={ <LoginPage /> } /> */}
         <Route path="/*" element={<Navigate to="/about" />} />
       </Routes>
-    </>
+    </UserProvider>
   );
 };
