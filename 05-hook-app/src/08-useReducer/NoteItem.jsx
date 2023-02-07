@@ -11,6 +11,7 @@ export const NoteItem = ({ note = {}, onDeleteNote, onToggleNote }) => {
       <span
         className={`align-self-center ${done ? 'text-decoration-line-through' : ''}`}
         onDoubleClick={() => onToggleNote(id)}
+        aria-label="span"
       >
         {description}
       </span>
