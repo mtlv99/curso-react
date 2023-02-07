@@ -15,11 +15,12 @@ export const useCounter = (initialValue = 10) => {
   // por lo que en el state se estaria guardando un 10[Object object], en vez del value. (Hace concatenación)
   // Forma correcta: onClick={() => increment(4)} (donde 4 es el numero que se va a incrementar)
   const increment = (value = 1) => {
-    setCounter(counter + value);
+    // Se paso a callback para que el testing quede mas limpio. Antes estaba como (counter + value).
+    setCounter((currentCounter) => currentCounter + value);
   };
   const decrement = (value = 1) => {
     // if (counter === 0) return;
-    setCounter(counter - value);
+    setCounter((currentCounter) => currentCounter - value);
   };
   const reset = (value = 1) => {
     setCounter(initialValue);
