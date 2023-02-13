@@ -20,7 +20,7 @@ export const HeroesRoutes = () => {
           <Route path="dc" element={<DcPage />} />
 
           <Route path="search" element={<SearchPage />} />
-          <Route path="hero" element={<HeroPage />} />
+          <Route path="hero/:id" element={<HeroPage />} />
 
           {/* Ruta comodín, si no hay ningun match, siempre irá a esta, es como el default de un switch */}
           <Route path="/" element={<Navigate to="/marvel" />} />
