@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getHeroById } from '../helpers';
 
@@ -13,7 +13,8 @@ export const HeroPage = () => {
   const navigate = useNavigate();
 
   // Esto se podria memorizar ya que el id no cambia.
-  const hero = getHeroById(id);
+  // La funcion se volvería a llamar cuando el id cambie.
+  const hero = useMemo(() => getHeroById(id), [id]);
 
   const onNavigateBack = () => {
     // Esto retrocede un valor en el stack de navigacion, pero podria sacar al usuario de la pagina.
