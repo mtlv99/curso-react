@@ -6,14 +6,13 @@ import {
   DcPage, HeroPage, MarvelPage, SearchPage,
 } from '../pages';
 
+// eslint-disable-next-line arrow-body-style
 export const HeroesRoutes = () => {
-  console.log('');
-
   return (
     <>
       <Navbar />
 
-      <div className="container">
+      <div className="container mt-4">
         <Routes>
 
           <Route path="marvel" element={<MarvelPage />} />

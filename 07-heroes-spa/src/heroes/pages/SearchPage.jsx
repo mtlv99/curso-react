@@ -36,8 +36,6 @@ export const SearchPage = () => {
     navigate(`?q=${searchText}`);
   };
 
-  console.log(q, heroesFound);
-
   return (
     <>
       <h1>Search</h1>
@@ -45,7 +43,7 @@ export const SearchPage = () => {
 
       <div className="row">
         <div className="col-5">
-          <h4>Searching</h4>
+          <h4>Looking for a hero?</h4>
 
           <hr />
 

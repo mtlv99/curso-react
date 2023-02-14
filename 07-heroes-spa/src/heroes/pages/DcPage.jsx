@@ -1,9 +1,8 @@
 import React from 'react';
 import { HeroList } from '../components';
 
+// eslint-disable-next-line arrow-body-style
 export const DcPage = () => {
-  console.log('');
-
   return (
     <>
       <h1>DC Comics</h1>

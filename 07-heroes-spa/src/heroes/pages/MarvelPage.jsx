@@ -1,9 +1,8 @@
 import React from 'react';
 import { HeroList } from '../components';
 
+// eslint-disable-next-line arrow-body-style
 export const MarvelPage = () => {
-  console.log('');
-
   return (
 
     <>
