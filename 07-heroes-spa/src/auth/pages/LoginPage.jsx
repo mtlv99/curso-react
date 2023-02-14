@@ -9,12 +9,15 @@ export const LoginPage = () => {
   const navigate = useNavigate();
 
   const onLogin = () => {
+    // Obtiene la ultima ruta donde estuvo el usuario.
+    const lastPath = localStorage.getItem('lastPath') || '/';
+
     login('Marco Leon');
 
     // Ver comentario del Navbar.jsx
-    // Acá se usa `/` para ir al root del app.
+    // Acá se usa `/` para ir al root del app (o el last path).
     // Con replace para que el usuario no pueda volver al login.
-    navigate('/', { replace: true });
+    navigate(lastPath, { replace: true });
   };
 
   return (
