@@ -1,12 +1,17 @@
+import { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../auth';
 
 export const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+
   // Antes, en versiones anteriores de React y React Router DOM, la info venia por
   // props en un objeto.
   // La forma nueva de acceder al objeto de navigation es por medio de este nuevo custom hook:
   const navigate = useNavigate();
 
   const onLogout = () => {
+    logout();
     // También tiene unos atributos adicionales llamados state y replace, que se verán a fondo
     // más adelante.
     // El replace sirve para reemplazar la ultima ruta en el stack de navegación, util para NO
@@ -55,7 +60,7 @@ export const Navbar = () => {
         <ul className="navbar-nav ml-auto">
 
           <span className="nav-item nav-link text-white">
-            Marco
+            {user?.name}
           </span>
 
           <button type="button" className="nav-item nav-link btn" onClick={onLogout}>
