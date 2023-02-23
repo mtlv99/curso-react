@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Toolbar } from '@mui/material';
 import { NavBar } from '../components/NavBar';
+import { SideBar } from '../components';
 
 const drawerWidth = 240;
 
@@ -16,9 +17,13 @@ export const JournalLayout = ({ children }) => {
 
 
       {/* Sidebar */}
+      <SideBar drawerWidth={drawerWidth} />
+
       {/* El `component` convierte el div en un main */}
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {/* Toolbar */}
+        {/* Toolbar (esto genera un espacio para que el texto del app baje, y no sea tapado por el navbar) */}
+        <Toolbar />
+
         { children }
       </Box>
 
