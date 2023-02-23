@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { MailOutline } from '@mui/icons-material';
+import { JournalLayout } from '../layout/JournalLayout';
 
 export const JournalPage = () => {
   console.log('');
@@ -10,10 +10,11 @@ export const JournalPage = () => {
   // <Typography component="h1">Journal Page</Typography>
   // <Typography variant="h1">Journal Page</Typography>
   return (
-    <>
-      {/* <Typography component="h1">Journal Page</Typography> */}
-      <Typography variant="h1">Journal Page</Typography>
-      <MailOutline />
-    </>
+    <JournalLayout>
+      <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, dolore doloremque. Rem aperiam, ipsum eius soluta, harum provident quia vero commodi hic veniam doloribus veritatis suscipit unde tempore, dolorum dolor.</Typography>
+
+      {/* NothingSelected */}
+      {/* NoteView */}
+    </JournalLayout>
   );
 };
