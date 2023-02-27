@@ -5,12 +5,14 @@ import App from './App';
 import './index.css';
 import { store } from './store';
 import { PokemonApp } from './PokemonApp';
+import { NotesApp } from './NotesApp';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
       <PokemonApp />
+      <NotesApp />
     </Provider>
   </React.StrictMode>,
 );
