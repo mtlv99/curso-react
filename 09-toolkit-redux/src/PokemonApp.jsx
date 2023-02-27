@@ -13,7 +13,7 @@ export const PokemonApp = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <h1>PokemonApp</h1>
       <hr />
 
@@ -30,6 +30,6 @@ export const PokemonApp = () => {
       >
         Next
       </button>
-    </>
+    </div>
   );
 };

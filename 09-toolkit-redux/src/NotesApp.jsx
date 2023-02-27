@@ -24,7 +24,7 @@ export const NotesApp = () => {
   };
 
   return (
-    <>
+    <div>
       <h1>NotesApp - RTK Query</h1>
       <hr />
       <h4>
@@ -51,7 +51,7 @@ export const NotesApp = () => {
       <button type="button" onClick={nextNote}>
         Next Todo
       </button>
-    </>
+    </div>
   );
 };
 

@@ -10,9 +10,11 @@ import { NotesApp } from './NotesApp';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
-      <PokemonApp />
-      <NotesApp />
+      <div className="exampleApps">
+        <App />
+        <PokemonApp />
+        <NotesApp />
+      </div>
     </Provider>
   </React.StrictMode>,
 );
