@@ -41,8 +41,6 @@ export const LoginPage = () => {
 
     // No olvidar llamar la función en vez de solo pasarla!
     const result = dispatch(startEmailSignIn({ email, password }));
-
-    console.log('result', result);
   };
 
   const onGoogleSignIn = (event) => {
@@ -54,7 +52,7 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="animate__animated animate__fadeIn animate__faster">
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
