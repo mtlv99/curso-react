@@ -25,9 +25,15 @@ export const LoginPage = () => {
 
   const { status, errorMessage } = useSelector((state) => state.auth);
 
+  // Cuidado con el valor por defecto de useForm! Luego de agregar el useEffect al useForm
+  // que detecta cambios en el state inicial, si se pasa un objeto directamente
+  // como atributo, cada vez que se rerenderiza el componente, estaría creando un
+  // nuevo objeto con una nueva posición en memoria, por lo que estaría creando
+  // ciclo/cycle infinito de rerenders!
   const {
     email, password, onInputChange, emailValid, passwordValid, isFormValid,
   } = useForm(formData, formValidations);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
 
 

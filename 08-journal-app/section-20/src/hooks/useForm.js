@@ -9,6 +9,11 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
     createValidators();
   }, [formState]);
 
+  // Detecta cuando la info de por defecto del form cambia.
+  useEffect(() => {
+    setFormState(initialForm);
+  }, [initialForm]);
+
   // Se memoriza para evitar rerenders innecesarios.
   const isFormValid = useMemo(() => {
     // Si encuentra algun valor que no sea null, retorna false.

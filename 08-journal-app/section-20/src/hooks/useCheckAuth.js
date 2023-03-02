@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FirebaseAuth } from '../firebase/config';
 import { login, logout } from '../store/auth';
+import { setNotes, startLoadingNotes } from '../store/journal';
 
 export const useCheckAuth = () => {
   const { status } = useSelector((state) => state.auth);
@@ -19,6 +20,7 @@ export const useCheckAuth = () => {
       const { uid, email, displayName, photoURL } = user;
       // eslint-disable-next-line object-curly-newline
       dispatch(login({ uid, email, displayName, photoURL }));
+      dispatch(startLoadingNotes());
     });
   }, []);
 
