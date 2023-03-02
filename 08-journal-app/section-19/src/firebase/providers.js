@@ -75,3 +75,8 @@ export const signInWithEmailPassword = async ({ email, password }) => {
     return { ok: false, errorMessage: error.message };
   }
 };
+
+// Cierra sesión del usuario, sin importar el método de
+// autenticación que usó.
+// eslint-disable-next-line no-return-await
+export const logoutFirebase = async () => await FirebaseAuth.signOut();

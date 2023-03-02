@@ -1,5 +1,7 @@
 /* eslint-disable arrow-body-style */
-import { signInWithGoogle, registerUserWithEmailPassword, signInWithEmailPassword } from '../../firebase/providers';
+import {
+  signInWithGoogle, registerUserWithEmailPassword, signInWithEmailPassword, logoutFirebase,
+} from '../../firebase/providers';
 import { checkingCredentials, login, logout } from './authSlice';
 
 export const checkingAuthentication = (email, password) => {
@@ -29,7 +31,6 @@ export const startEmailSignIn = ({ email, password }) => {
     dispatch(checkingCredentials());
 
     const result = await signInWithEmailPassword({ email, password });
-    console.log('result', result);
     if (!result.ok) return dispatch(logout({ errorMessage: result.errorMessage }));
 
     return dispatch(login(result));
@@ -53,3 +54,10 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
   };
 };
 
+export const startLogout = () => {
+  return async (dispatch) => {
+    await logoutFirebase();
+
+    dispatch(logout());
+  };
+};
