@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SaveOutlined, UploadOutlined } from '@mui/icons-material';
+import { DeleteOutline, SaveOutlined, UploadOutlined } from '@mui/icons-material';
 import {
   Button, Grid, IconButton, TextField, Typography,
 } from '@mui/material';
@@ -9,7 +9,9 @@ import 'sweetalert2/dist/sweetalert2.css';
 
 import { ImageGallery } from '../components';
 import { useForm } from '../../hooks';
-import { setActiveNote, startSavingNote, startUploadingFiles } from '../../store/journal';
+import {
+  setActiveNote, startDeletingNote, startSavingNote, startUploadingFiles,
+} from '../../store/journal';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -50,6 +52,10 @@ export const NoteView = () => {
     if (target.files === 0) return;
     console.log('subiendo archivos', target.files);
     dispatch(startUploadingFiles(target.files));
+  };
+
+  const onDelete = () => {
+    dispatch(startDeletingNote());
   };
 
   return (
@@ -119,6 +125,14 @@ export const NoteView = () => {
           onChange={onInputChange}
         />
       </Grid>
+
+      <Grid container justifyContent="end">
+        <Button onClick={onDelete} sx={{ mt: 2 }} color="error">
+          <DeleteOutline />
+          Borrar
+        </Button>
+      </Grid>
+
       {/* Image gallery */}
       <ImageGallery imageUrls={activeNote.imageUrls} />
 
