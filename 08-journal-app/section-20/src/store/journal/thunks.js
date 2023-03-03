@@ -1,9 +1,9 @@
 import { collection, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseDB } from '../../firebase/config';
 import {
-  addNewEmptyNote, savingNewNote, setActiveNote, setNotes, updateNote,
+  addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, updateNote,
 } from '.';
-import { loadNotes } from '../../helpers/loadNotes';
+import { loadNotes, fileUpload } from '../../helpers';
 
 // eslint-disable-next-line arrow-body-style
 export const startNewNote = () => {
@@ -53,4 +53,20 @@ export const startSavingNote = () => async (dispatch, getState) => {
   await setDoc(docRef, noteToFireStore, { merge: true });
 
   dispatch(updateNote(activeNote));
+};
+
+export const startUploadingFiles = (files = []) => async (dispatch) => {
+  dispatch(setSaving());
+
+  const fileUploadPromises = [];
+
+  // Crea un array de Promises.
+  // eslint-disable-next-line no-restricted-syntax
+  for (const file of files) {
+    fileUploadPromises.push(fileUpload(file));
+  }
+
+  const photoUrls = await Promise.all(fileUploadPromises);
+
+  dispatch(setPhotosToActiveNote(photoUrls));
 };

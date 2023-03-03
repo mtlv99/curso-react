@@ -1,18 +1,20 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SaveOutlined } from '@mui/icons-material';
+import { SaveOutlined, UploadOutlined } from '@mui/icons-material';
 import {
-  Button, Grid, TextField, Typography,
+  Button, Grid, IconButton, TextField, Typography,
 } from '@mui/material';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 
 import { ImageGallery } from '../components';
 import { useForm } from '../../hooks';
-import { setActiveNote, startSavingNote } from '../../store/journal';
+import { setActiveNote, startSavingNote, startUploadingFiles } from '../../store/journal';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
+
+  const fileInputRef = useRef();
   const { activeNote, savedNoteLabel, isSaving } = useSelector((state) => state.journal);
 
   // Se hizo una pequeña modificación en el useForm para que se actualice
@@ -44,6 +46,12 @@ export const NoteView = () => {
     dispatch(startSavingNote());
   };
 
+  const onFileInputChange = ({ target }) => {
+    if (target.files === 0) return;
+    console.log('subiendo archivos', target.files);
+    dispatch(startUploadingFiles(target.files));
+  };
+
   return (
     <Grid
       className="animate__animated animate__fadeIn animate__faster"
@@ -58,6 +66,23 @@ export const NoteView = () => {
 
       </Grid>
       <Grid item>
+
+        { /*
+          Se recomienda usar ref siempre
+          en vez de querySelector, en caso de que hubieran elementos con el mismo id/name
+          */}
+        <input type="file" multiple ref={fileInputRef} onChange={onFileInputChange} style={{ display: 'none' }} />
+
+        <IconButton
+          color="primary"
+          disabled={isSaving}
+          // El input para subir archivos está oculto. Para poder simular un click en él,
+          // se utiliza un useRef a ese input y se genera un evento de click por medio de JS.
+          onClick={() => fileInputRef.current.click()}
+        >
+          <UploadOutlined />
+        </IconButton>
+
         <Button
           color="primary"
           sx={{ padding: 2 }}
@@ -95,7 +120,7 @@ export const NoteView = () => {
         />
       </Grid>
       {/* Image gallery */}
-      <ImageGallery />
+      <ImageGallery imageUrls={activeNote.imageUrls} />
 
     </Grid>
   );
