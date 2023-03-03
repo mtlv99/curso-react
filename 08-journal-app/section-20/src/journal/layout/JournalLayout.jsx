@@ -5,28 +5,24 @@ import { SideBar } from '../components';
 
 const drawerWidth = 240;
 
-export const JournalLayout = ({ children }) => {
-  console.log('');
+export const JournalLayout = ({ children }) => (
+  // El Box es similar a un div
+  <Box sx={{ display: 'flex' }} className="animate__animated animate__fadeIn animate__faster">
 
-  return (
-    // El Box es similar a un div
-    <Box sx={{ display: 'flex' }} className="animate__animated animate__fadeIn animate__faster">
-
-      {/* Navbar */}
-      <NavBar drawerWidth={drawerWidth} />
+    {/* Navbar */}
+    <NavBar drawerWidth={drawerWidth} />
 
 
-      {/* Sidebar */}
-      <SideBar drawerWidth={drawerWidth} />
+    {/* Sidebar */}
+    <SideBar drawerWidth={drawerWidth} />
 
-      {/* El `component` convierte el div en un main */}
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {/* Toolbar (esto genera un espacio para que el texto del app baje, y no sea tapado por el navbar) */}
-        <Toolbar />
+    {/* El `component` convierte el div en un main */}
+    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      {/* Toolbar (esto genera un espacio para que el texto del app baje, y no sea tapado por el navbar) */}
+      <Toolbar />
 
-        { children }
-      </Box>
-
+      { children }
     </Box>
-  );
-};
+
+  </Box>
+);
