@@ -55,7 +55,7 @@ export const journalSlice = createSlice({
       state.isSaving = false;
       state.savedNoteLabel = '';
       state.notes = [];
-      state.active = null;
+      state.activeNote = null;
     },
     deleteNoteById: (state, action) => {
       state.activeNote = null;
