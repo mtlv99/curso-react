@@ -4,13 +4,16 @@ import { SaveOutlined } from '@mui/icons-material';
 import {
   Button, Grid, TextField, Typography,
 } from '@mui/material';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+
 import { ImageGallery } from '../components';
 import { useForm } from '../../hooks';
 import { setActiveNote, startSavingNote } from '../../store/journal';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
-  const { activeNote } = useSelector((state) => state.journal);
+  const { activeNote, savedNoteLabel, isSaving } = useSelector((state) => state.journal);
 
   // Se hizo una pequeña modificación en el useForm para que se actualice
   // cuando detecte cambios en los valores suministrados.
@@ -28,6 +31,13 @@ export const NoteView = () => {
   useEffect(() => {
     dispatch(setActiveNote(formState));
   }, [formState]);
+
+  // Mostrar una alerta cuando la nota se actualiza correctamente.
+  useEffect(() => {
+    if (savedNoteLabel.length > 0) {
+      Swal.fire('Guardado', savedNoteLabel, 'success');
+    }
+  }, [savedNoteLabel]);
 
 
   const onSaveNote = () => {
@@ -52,6 +62,7 @@ export const NoteView = () => {
           color="primary"
           sx={{ padding: 2 }}
           onClick={onSaveNote}
+          disabled={isSaving}
         >
           <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
           Guardar
