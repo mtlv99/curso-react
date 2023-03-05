@@ -8,7 +8,7 @@ import { demoUser } from '../../fixtures/authFixtures';
 
 jest.mock('../../../src/firebase/providers');
 
-describe('Pruebas en AuthThunks', () => {
+describe('Pruebas en Auth thunks', () => {
   const dispatch = jest.fn();
 
   // es mejor limpiar todos los mocks en cada test.
