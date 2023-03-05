@@ -7,25 +7,26 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
 import { getEnvironments } from '../helpers/getEnvironments';
 
-const env = getEnvironments();
-console.log(env);
+// Las variables de entorno JAMÁS deberían ser subidas al repositorio,
+// pero las dejo acá por fines educativos, y porque no contienen keys
+// muy sensibles (solo son proyectos de prueba).
+const {
+  VITE_APIKEY,
+  VITE_AUTHDOMAIN,
+  VITE_PROJECTID,
+  VITE_STORAGEBUCKET,
+  VITE_MESSAGINGSENDERID,
+  VITE_APPID,
 
-// Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyCYtRrxp6PttWjqBa8t7RGNIpGlElSXwa0',
-//   authDomain: 'curso-react-2e860.firebaseapp.com',
-//   projectId: 'curso-react-2e860',
-//   storageBucket: 'curso-react-2e860.appspot.com',
-//   messagingSenderId: '600252053828',
-//   appId: '1:600252053828:web:e5729d3c1de1c651907f11',
-// };
+} = getEnvironments();
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyBKkIjJYwwfgSjOzfdqPLrM7XtUGOGptKQ',
-  authDomain: 'curso-react-testing-c0052.firebaseapp.com',
-  projectId: 'curso-react-testing-c0052',
-  storageBucket: 'curso-react-testing-c0052.appspot.com',
-  messagingSenderId: '582800799729',
-  appId: '1:582800799729:web:a8a0e8909d327de2203650',
+  apiKey: VITE_APIKEY,
+  authDomain: VITE_AUTHDOMAIN,
+  projectId: VITE_PROJECTID,
+  storageBucket: VITE_STORAGEBUCKET,
+  messagingSenderId: VITE_MESSAGINGSENDERID,
+  appId: VITE_APPID,
 };
 
 // Initialize Firebase
