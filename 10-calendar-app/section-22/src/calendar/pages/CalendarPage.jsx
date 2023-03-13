@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import { addHours } from 'date-fns';
-import { Navbar } from '..';
+import { Navbar } from '../components/Navbar';
 import { localizer, getMessagesES } from '../../helpers';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { CalendarEventBox } from '../components/CalendarEventBox';
+import { CalendarModal } from '../components/CalendarModal';
 
 
 const events = [{
@@ -18,7 +21,7 @@ const events = [{
 }];
 
 export const CalendarPage = () => {
-  console.log('');
+  const [lastSelectedView, setLastSelectedView] = useState(localStorage.getItem('lastView') || 'week');
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     console.log({
@@ -37,6 +40,17 @@ export const CalendarPage = () => {
     };
   };
 
+  const onDoubleClick = (event) => {
+    console.log({ doubleClick: event });
+  };
+  const onSelect = (event) => {
+    console.log({ click: event });
+  };
+  const onViewChanged = (event) => {
+    localStorage.setItem('lastView', event);
+    setLastSelectedView(event);
+  };
+
   return (
     <>
       <Navbar />
@@ -50,11 +64,21 @@ export const CalendarPage = () => {
         messages={getMessagesES()}
         localizer={localizer}
         events={events}
+        defaultView={lastSelectedView}
         startAccessor="start"
         endAccessor="end"
         style={{ height: 'calc(100vh - 80px)' }}
         eventPropGetter={eventStyleGetter}
+        // Con esto se pueden crear componentes custom para las diferentes partes del calendario
+        components={{
+          event: CalendarEventBox,
+        }}
+        onDoubleClickEvent={onDoubleClick}
+        onSelectEvent={onSelect}
+        onView={onViewChanged}
       />
+
+      <CalendarModal />
     </>
   );
 };
