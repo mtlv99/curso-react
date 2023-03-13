@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Modal from 'react-modal';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,6 +7,7 @@ import { addHours, differenceInSeconds } from 'date-fns';
 import es from 'date-fns/locale/es';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { useCalendarStore, useUiStore } from '../../hooks';
 
 registerLocale('es', es);
 
@@ -24,16 +25,17 @@ const customStyles = {
 // El root del App de React.
 Modal.setAppElement('#root');
 
-
 export const CalendarModal = () => {
+  const { closeDateModal, isDateModalOpen } = useUiStore();
+  const { activeEvent, startSavingEvent } = useCalendarStore();
+
   const [formValues, setFormValues] = useState({
-    title: 'Fernando',
-    notes: 'Herrera',
+    title: '',
+    notes: '',
     start: new Date(),
     end: addHours(new Date(), 2),
   });
 
-  const [isOpen, setIsOpen] = useState(true);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
 
@@ -43,6 +45,14 @@ export const CalendarModal = () => {
       ? ''
       : 'is-invalid';
   }, [formValues.title, formSubmitted]);
+
+  useEffect(() => {
+    // Hay un punto donde está en null: al cargar la aplicación. Por eso es necesaria esta validación.
+    if (activeEvent !== null) {
+      setFormValues({ ...activeEvent });
+    }
+  }, [activeEvent]);
+
 
 
 
@@ -62,12 +72,13 @@ export const CalendarModal = () => {
   };
 
   const onCloseModal = () => {
-    console.log('cerrando modal');
-    setIsOpen(false);
+    closeDateModal();
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+
+    setFormSubmitted(true);
 
     // Si la diferencia es negativa, no deberia permitir guardar el evento.
     const difference = differenceInSeconds(formValues.end, formValues.start);
@@ -81,13 +92,17 @@ export const CalendarModal = () => {
 
     if (formValues.title.length <= 0) return;
 
-    console.log(formValues);
+    await startSavingEvent(formValues);
+    closeDateModal();
+
+    setFormSubmitted(false);
   };
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isDateModalOpen}
       onRequestClose={onCloseModal}
+      // onRequestClose={() => closeDateModal()}
       style={customStyles}
       className="modal"
       overlayClassName="modal-fondo"
