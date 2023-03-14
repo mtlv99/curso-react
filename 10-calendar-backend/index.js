@@ -11,8 +11,13 @@ const app = express();
 // Middleware: funciones que se ejecutan cuando pasa cualquier petición por el servidor.
 app.use(express.static('public'));
 
+// Lectura y parseo de body en formato JSON (necesario para leer JSON's enviados dentro de una petición)
+// Nota: esto debe ir ANTES de todas las rutas.
+app.use(express.json());
+
 // Rutas
 app.use('/api/auth', require('./routes/auth'));
+
 
 // Levanta el servidor
 app.listen(process.env.PORT, () => {
