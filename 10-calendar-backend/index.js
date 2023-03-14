@@ -1,10 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const { dbConnection } = require('./database/config');
 
 dotenv.config();
 
 // Crea el servidor express.
 const app = express();
+
+// Base de datos
+dbConnection();
 
 // Directorio Público
 // `.use()` es un Middleware.
@@ -17,7 +21,6 @@ app.use(express.json());
 
 // Rutas
 app.use('/api/auth', require('./routes/auth'));
-
 
 // Levanta el servidor
 app.listen(process.env.PORT, () => {
