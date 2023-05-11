@@ -1,17 +1,27 @@
 const { response } = require('express');
+const Usuario = require('../models/Usuario');
 
 // El response e importaciones de express acá, es para que
 // vscode nos muestre la ayuda del IntelliSense.
-const crearUsuario = (req, res = response) => {
-  const { name, email, password } = req.body;
+const crearUsuario = async (req, res = response) => {
+  // const { name, email, password } = req.body;
 
-  return res.status(201).json({
-    ok: true,
-    msg: 'registro',
-    name,
-    email,
-    password,
-  });
+  try {
+    const usuario = new Usuario(req.body);
+    await usuario.save();
+
+    return res.status(201).json({
+      ok: true,
+      msg: 'registro',
+    });
+  } catch (error) {
+    console.log('Error', error);
+
+    return res.status(500).json({
+      ok: true,
+      msg: 'Error interno.',
+    });
+  }
 };
 
 const loginUsuario = (req, res = response) => {
