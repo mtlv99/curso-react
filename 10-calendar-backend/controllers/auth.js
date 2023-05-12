@@ -1,6 +1,7 @@
 const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/Usuario');
+const { generarJWT } = require('../helpers/jwt');
 
 // El response e importaciones de express acá, es para que
 // vscode nos muestre la ayuda del IntelliSense.
@@ -26,10 +27,14 @@ const crearUsuario = async (req, res = response) => {
 
     await usuario.save();
 
+    // Generar JWT
+    const token = await generarJWT(usuario.id, usuario.name);
+
     return res.status(201).json({
       ok: true,
       uid: usuario.id,
       name: usuario.name,
+      token,
     });
   } catch (error) {
     console.log('Error', error);
@@ -65,10 +70,14 @@ const loginUsuario = async (req, res = response) => {
       });
     }
 
+    // Generar JWT
+    const token = await generarJWT(usuario.id, usuario.name);
+
     return res.json({
       ok: true,
       uid: usuario.id,
       name: usuario.name,
+      token,
     });
   } catch (error) {
     console.log('Error', error);
@@ -79,10 +88,13 @@ const loginUsuario = async (req, res = response) => {
     });
   }
 };
-const revalidarToken = (req, res = response) => {
+const revalidarToken = async (req, res = response) => {
+  const { uid, name } = req;
+  // Generar JWT
+  const token = await generarJWT(uid, name);
   res.json({
     ok: true,
-    msg: 'renew',
+    token,
   });
 };
 
