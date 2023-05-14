@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "79e25ecb-eec3-4bc8-8f62-14af915be86a",
+		"name": "MERN Calendar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3930284"
+	},
+	"item": [
+		{
+			"name": "Auth - Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"marco@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Crear usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Marco\",\r\n    \"email\": \"marco@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/auth/new",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Revalidar JWT",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDVjODJiOGNkNTk3ZThhMzk4MzkzNTAiLCJuYW1lIjoiTWFyY28iLCJpYXQiOjE2ODM4NzYxNjcsImV4cCI6MTY4Mzg4MzM2N30.mTqYGn_fpUdoPoUM-piYJo8ypMeWymqRvzbjwolZ7eU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/api/auth/renew",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"renew"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event - getEventos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDVjODJiOGNkNTk3ZThhMzk4MzkzNTAiLCJuYW1lIjoiTWFyY28iLCJpYXQiOjE2ODQwMzIxOTYsImV4cCI6MTY4NDAzOTM5Nn0.7sJArZJNWSJyXB3KqvGUCbzjXUCFhnYbpS-ZhWt_WBw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/api/events",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event - crearEvento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDVjODJiOGNkNTk3ZThhMzk4MzkzNTAiLCJuYW1lIjoiTWFyY28iLCJpYXQiOjE2ODQwMzIxOTYsImV4cCI6MTY4NDAzOTM5Nn0.7sJArZJNWSJyXB3KqvGUCbzjXUCFhnYbpS-ZhWt_WBw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Evento 3 titulo\",\r\n    \"start\": 1,\r\n    \"end\": 1000000,\r\n    \"notes\": \"Borrame\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/events",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event - actualizarEvento",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDVjODJiOGNkNTk3ZThhMzk4MzkzNTAiLCJuYW1lIjoiTWFyY28iLCJpYXQiOjE2ODQwMzIxOTYsImV4cCI6MTY4NDAzOTM5Nn0.7sJArZJNWSJyXB3KqvGUCbzjXUCFhnYbpS-ZhWt_WBw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Titulo 2\",\r\n    \"start\": 1,\r\n    \"end\": 1000000,\r\n    \"notes\": \"Comprar algo 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/events/6460596830809db6bae1fc14",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"events",
+						"6460596830809db6bae1fc14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event - eliminarEvento",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDVjODJiOGNkNTk3ZThhMzk4MzkzNTAiLCJuYW1lIjoiTWFyY28iLCJpYXQiOjE2ODQwMzIxOTYsImV4cCI6MTY4NDAzOTM5Nn0.7sJArZJNWSJyXB3KqvGUCbzjXUCFhnYbpS-ZhWt_WBw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/api/events/64605f9efd4a07a37b0ee518",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"events",
+						"64605f9efd4a07a37b0ee518"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
