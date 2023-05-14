@@ -46,6 +46,29 @@ export const useAuthStore = () => {
     }
   };
 
+  const checkAuthToken = async () => {
+    // Si el token no existe, se hace logout.
+    const token = localStorage.getItem('token');
+    if (!token) return dispatch(onLogout());
+
+    try {
+      // Si el token obtenido de localStorage sigue siendo valido, se regenera otro y se guarda immediatamente.
+      const { data } = await calendarApi.get('auth/renew');
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('token-init-date', new Date().getTime());
+      return dispatch(onLogin({ name: data.name, uid: data.uid }));
+    } catch (error) {
+      // Si ya no es valido, se limpia del storage y se hace un logout para obligar al usuario a autenticarse de nuevo.
+      localStorage.clear();
+      return dispatch(onLogout());
+    }
+  };
+
+  const startLogout = () => {
+    localStorage.clear();
+    dispatch(onLogout());
+  };
+
 
   return {
     // Propiedades
@@ -55,5 +78,7 @@ export const useAuthStore = () => {
     // Metodos
     startLogin,
     startRegister,
+    startLogout,
+    checkAuthToken,
   };
 };

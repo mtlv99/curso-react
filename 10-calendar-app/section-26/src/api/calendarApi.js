@@ -7,7 +7,17 @@ export const calendarApi = axios.create({
   baseURL: VITE_API_URL,
 });
 
-// TODO: agregar interceptores
+// Los interceptores de request pasan antes de enviar la request.
+// también existen los de response, que pasan después de recibir un response.
+calendarApi.interceptors.request.use((config) => {
+  // eslint-disable-next-line no-param-reassign
+  config.headers = {
+    ...config.headers,
+    'x-token': localStorage.getItem('token') || '',
+  };
+
+  return config;
+});
 
 // En el archivo de barril hay que agregar el "default as calendarApi"
 // porque es una exportación por defecto.
