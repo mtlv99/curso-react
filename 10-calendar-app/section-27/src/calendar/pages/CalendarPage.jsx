@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import { Navbar } from '../components/Navbar';
 import { localizer, getMessagesES } from '../../helpers';
@@ -9,21 +9,22 @@ import { CalendarModal } from '../components/CalendarModal';
 import { FabAddNew } from '../components/FabAddNew';
 import { FabDelete } from '../components/FabDelete';
 
-import { useUiStore, useCalendarStore } from '../../hooks';
+import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
 
 export const CalendarPage = () => {
+  const { user } = useAuthStore();
   const { openDateModal, isDateModalOpen } = useUiStore();
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
 
   const [lastSelectedView, setLastSelectedView] = useState(localStorage.getItem('lastView') || 'week');
 
-  const eventStyleGetter = (event, start, end, isSelected) => {
-    console.log({
-      event, start, end, isSelected,
-    });
+  const eventStyleGetter = (event) => {
+    // Hay una insconsistencia en la forma en que se retorna el id en el backend, así que aquí se toma ambas condiciones ('_id' y 'uid')
+    // eslint-disable-next-line no-underscore-dangle
+    const isMyEvent = (user.uid === event.user._id) || (user.uid === event.user.uid);
 
     const style = {
-      backgroundColor: '#347CF7',
+      backgroundColor: isMyEvent ? '#003da5' : '#768399',
       borderRadius: '0px',
       opacity: 0.8,
       color: 'white',
@@ -34,18 +35,23 @@ export const CalendarPage = () => {
     };
   };
 
-  const onDoubleClick = (event) => {
-    // console.log({ doubleClick: event });
-    openDateModal();
-  };
+  // const onDoubleClick = (event) => {
+  //   // console.log({ doubleClick: event });
+  // };
   const onSelect = (event) => {
-    // console.log({ click: event });
     setActiveEvent(event);
+    openDateModal();
   };
   const onViewChanged = (event) => {
     localStorage.setItem('lastView', event);
     setLastSelectedView(event);
   };
+
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
+
 
   return (
     <>
@@ -69,7 +75,7 @@ export const CalendarPage = () => {
         components={{
           event: CalendarEventBox,
         }}
-        onDoubleClickEvent={onDoubleClick}
+        // onDoubleClickEvent={onDoubleClick}
         onSelectEvent={onSelect}
         onView={onViewChanged}
       />

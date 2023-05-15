@@ -12,7 +12,7 @@ export const FabDelete = () => {
       type="button"
       className="btn btn-danger fab-danger"
       onClick={handleDelete}
-      style={{ display: hasEventSelected ? '' : 'none' }}
+      style={{ display: hasEventSelected ? '' : 'none', zIndex: 5000 }}
     >
       <i className="fas fa-trash-alt" />
     </button>
