@@ -27,6 +27,13 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
 
+// Esto es para cargar el build de produccion y que sea servido por el mismo proyecto del backend.
+// Es una alternativa a usar HashRouter (funciona, pero no es recomendado).
+app.get('*', (req, res) => {
+  // eslint-disable-next-line no-path-concat, prefer-template
+  res.sendFile(__dirname + './public/index.html');
+})
+
 // Levanta el servidor
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
