@@ -31,7 +31,7 @@ app.use('/api/events', require('./routes/events'));
 // Es una alternativa a usar HashRouter (funciona, pero no es recomendado).
 app.get('*', (req, res) => {
   // eslint-disable-next-line no-path-concat, prefer-template
-  res.sendFile(__dirname + './public/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 })
 
 // Levanta el servidor
