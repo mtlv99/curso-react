@@ -19,7 +19,7 @@ export const useUiStore = () => {
 
   const toggleDateModal = () => {
     // eslint-disable-next-line no-unused-expressions
-    isDateModalOpen ? openDateModal() : closeDateModal();
+    isDateModalOpen ? closeDateModal() : openDateModal();
   };
 
   return {
